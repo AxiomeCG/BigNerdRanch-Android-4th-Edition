@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProviders
 import java.util.*
 
 private const val ARG_CRIME_ID = "crime_id"
-private const val TAG = "CrimeFragment"
 private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0
 class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
