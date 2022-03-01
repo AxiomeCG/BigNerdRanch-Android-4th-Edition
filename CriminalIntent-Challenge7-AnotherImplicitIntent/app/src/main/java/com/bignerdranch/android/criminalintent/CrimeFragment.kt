@@ -1,5 +1,6 @@
 package com.bignerdranch.android.criminalintent
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,8 +19,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import java.net.URI
 import java.util.*
 import java.util.logging.Logger
 
@@ -27,6 +30,7 @@ private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0
 private const val REQUEST_CONTACT = 1
+private const val REQUEST_PHONE = 2
 private const val DATE_FORMAT = "EEE, MM, dd"
 
 class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
@@ -36,6 +40,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var solvedCheckBox: CheckBox
     private lateinit var reportButton: Button
     private lateinit var suspectButton: Button
+    private lateinit var callButton: Button
 
     private val crimeDetailViewModel: CrimeDetailViewModel by lazy {
         ViewModelProviders.of(this).get(CrimeDetailViewModel::class.java)
@@ -70,6 +75,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
         solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
         reportButton = view.findViewById(R.id.crime_report) as Button
         suspectButton = view.findViewById(R.id.crime_suspect) as Button
+        callButton = view.findViewById(R.id.crime_call) as Button
         return view
     }
 
@@ -174,6 +180,67 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
             }
         }
 
+        callButton.apply {
+
+            when (PackageManager.PERMISSION_GRANTED) {
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.READ_CONTACTS
+                ) -> {
+                    val pickPhoneIntent =
+                        Intent(
+                            Intent.ACTION_PICK,
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+                        )
+                    setOnClickListener {
+                        startActivityForResult(pickPhoneIntent, REQUEST_PHONE)
+                    }
+                }
+                else -> {
+                    // You can directly ask for the permission.
+                    requestPermissions(
+                        arrayOf(Manifest.permission.READ_CONTACTS),
+                        REQUEST_PHONE
+                    )
+                }
+            }
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_PHONE -> {
+                // If request is cancelled, the result arrays are empty.
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    val pickPhoneIntent =
+                        Intent(
+                            Intent.ACTION_PICK
+                        ).apply {
+                            type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
+                        }
+                    startActivityForResult(pickPhoneIntent, REQUEST_PHONE)
+
+                } else {
+                    // Explain to the user that the feature is unavailable because
+                    // the features requires a permission that the user has denied.
+                    // At the same time, respect the user's decision. Don't link to
+                    // system settings in an effort to convince the user to change
+                    // their decision.
+                    Log.e("CrimeFragment", "Unavailable permissions CONTACTS")
+                }
+                return
+            }
+            else -> {
+            }
+        }
     }
 
     override fun onStop() {
@@ -205,6 +272,44 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
                     crimeDetailViewModel.saveCrime(crime)
                     suspectButton.text = suspect
                 }
+            }
+            requestCode == REQUEST_PHONE && data != null -> {
+                Log.i("Request Phone", "URI: ${data.data}")
+
+                val contactUri = data.data
+                val queries = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                val cursor = requireActivity()
+                    .contentResolver
+                    .query(
+                        contactUri!!,
+                        queries,
+                        null,
+                        null,
+                        null
+                    )
+
+                cursor?.use { it ->
+                    if (it.count == 0) {
+                        return
+                    }
+                    // Pull out the first column of the first row of data -
+                    // that is your suspect's name
+                    it.moveToFirst()
+
+                    val phoneIndex =
+                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                    Log.d("Phone index", phoneIndex.toString())
+
+                    val phone = it.getString(phoneIndex)
+
+                    Log.d("CrimePhone", phone)
+                    val number: Uri = Uri.parse("tel:$phone")
+
+                    startActivity(Intent(Intent.ACTION_DIAL, number))
+
+                }
+
+
             }
         }
     }

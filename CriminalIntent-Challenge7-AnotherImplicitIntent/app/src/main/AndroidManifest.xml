@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bignerdranch.android.criminalintent">
-
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="content" android:host="com.android.contacts"
-                android:mimeType="vnd.android.cursor.item/*" />
+            <data
+                android:host="com.android.contacts"
+                android:mimeType="vnd.android.cursor.item/*"
+                android:scheme="content" />
         </intent>
     </queries>
     <application
