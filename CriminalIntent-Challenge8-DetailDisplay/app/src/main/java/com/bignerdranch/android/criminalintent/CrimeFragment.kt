@@ -24,6 +24,7 @@ import java.util.*
 
 private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
+private const val DIALOG_ZOOM = "DialogZoom"
 private const val REQUEST_DATE = 0
 private const val REQUEST_CONTACT = 1
 private const val REQUEST_PHOTO = 2
@@ -114,7 +115,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
 
     private fun updatePhotoView() {
         if (photoFile.exists()) {
-            val bitmap = getScaledBitmap(photoFile.path,requireActivity())
+            val bitmap = getScaledBitmap(photoFile.path, requireActivity())
             photoView.setImageBitmap(bitmap)
         } else {
             photoView.setImageBitmap(null)
@@ -226,6 +227,12 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
             }
         }
 
+        photoView.setOnClickListener {
+            ZoomImageDialogFragment.newInstance(photoFile.path).apply {
+                show(this@CrimeFragment.requireFragmentManager(), DIALOG_ZOOM)
+            }
+        }
+
     }
 
     override fun onStop() {
@@ -259,7 +266,10 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
                 }
             }
             requestCode == REQUEST_PHOTO -> {
-                requireActivity().revokeUriPermission(photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                requireActivity().revokeUriPermission(
+                    photoUri,
+                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                )
                 updatePhotoView()
             }
         }
@@ -269,6 +279,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
         super.onDetach()
         requireActivity().revokeUriPermission(photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
     }
+
     override fun onDateSelected(date: Date) {
         crime.date = date
         updateUI()

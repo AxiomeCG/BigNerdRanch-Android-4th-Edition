@@ -19,4 +19,5 @@
     <string name="send_report">Send crime report via</string>
     <string name="crime_photo_descr">Crime photo</string>
     <string name="crime_camera_descr">Button with a camera icon</string>
+    <string name="zoomed_image">Zoomed image</string>
 </resources>
