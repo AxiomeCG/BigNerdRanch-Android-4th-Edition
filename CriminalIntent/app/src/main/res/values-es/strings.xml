@@ -15,6 +15,7 @@
     <string name="crime_report_suspect">el/la sospechoso/a es %s.</string>
     <string name="crime_report_subject">IntentoCriminal Informe del Crimen</string>
     <string name="send_report">Enviar el informe del crimen a través de</string>
-    <string name="crime_camera_descr">Botón con el icono de una cámara</string>
-    <string name="crime_photo_descr">Foto del crimen</string>
+    <string name="crime_photo_button_description">Tomar foto de la escena del crimen</string>
+    <string name="crime_photo_image_description">Foto de la escena del crimen (establecida)</string>
+    <string name="crime_photo_no_image_description">Foto de la escena del crimen (no establecida)</string>
 </resources>
