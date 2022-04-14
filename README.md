@@ -1,3 +1,11 @@
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/18304870/163430896-fa0bc26e-d186-4127-8ebb-cbf8df64fd6a.png">
+</p>
+
+<p align="center"> Still in progress:</p>
+<p align="center">▰▰▰▰▰▱▱▱▱ ~56%</p>
+
 # BigNerdRanch-Android-4th-Edition
 List of my work following the "Android Programming - The Big Nerd Ranch Guide - 4th Edition" with potential challenges solutions
 
