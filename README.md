@@ -4,7 +4,7 @@
 </p>
 
 <p align="center"> Still in progress:</p>
-<p align="center">▰▰▰▰▰▱▱▱▱ ~56%</p>
+<p align="center">▰▰▰▰▰▰▰▱▱▱▱▱ ~59%</p>
 
 # BigNerdRanch-Android-4th-Edition
 List of my work following the "Android Programming - The Big Nerd Ranch Guide - 4th Edition" with potential challenges solutions
