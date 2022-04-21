@@ -4,7 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5359375" />
-        <entry key="app/src/main/res/layout/list_item_sound.xml" value="0.5359375" />
+        <entry key="app/src/main/res/layout/list_item_sound.xml" value="0.25" />
       </map>
     </option>
   </component>
