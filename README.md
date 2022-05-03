@@ -4,7 +4,7 @@
 </p>
 
 <p align="center"> Still in progress:</p>
-<p align="center">▰▰▰▰▰▰▱▱▱▱ ~61%</p>
+<p align="center">▰▰▰▰▰▱▱▱ ~63%</p>
 
 # BigNerdRanch-Android-4th-Edition
 List of my work following the "Android Programming - The Big Nerd Ranch Guide - 4th Edition" with potential challenges solutions
@@ -16,6 +16,10 @@ The aim is to keep track of my work on this book and to share with people (stuck
 # Contributing
 
 Feel free to point out eventual mistakes or missing part by raising an issue or creating a topic in the Discussions section.
+
+# Missing challenges
+- Chapter 18 - Improving the List, Providing Enough Context for Data Entry, Announcing Events
+- Chapter 22 - Button themes
 
 # Reference
 
