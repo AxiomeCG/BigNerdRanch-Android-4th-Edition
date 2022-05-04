@@ -7,6 +7,7 @@
         <entry key="../../../Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_2.xml" value="0.2947916666666667" />
         <entry key="../../Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/activity_nerd_launcher.xml" value="0.5354166666666667" />
+        <entry key="app/src/main/res/layout/icon_text_view.xml" value="0.5" />
       </map>
     </option>
   </component>
