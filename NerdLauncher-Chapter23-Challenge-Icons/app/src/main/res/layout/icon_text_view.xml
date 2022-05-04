@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/icon_image_view"
+        android:id="@+id/iconImageView"
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:contentDescription="icon"
@@ -15,12 +15,12 @@
         tools:src="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/launcher_app_name_text_view"
+        android:id="@+id/launcherAppNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/icon_image_view"
+        app:layout_constraintStart_toEndOf="@+id/iconImageView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Test" />
 </LinearLayout>

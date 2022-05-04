@@ -49,8 +49,8 @@ class NerdLauncherActivity : AppCompatActivity() {
     private class ActivityHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         private val layout = itemView as LinearLayout
-        private val imageView: ImageView = layout.findViewById(R.id.icon_image_view)
-        private val textView: TextView = layout.findViewById(R.id.launcher_app_name_text_view)
+        private val imageView: ImageView = layout.findViewById(R.id.iconImageView)
+        private val textView: TextView = layout.findViewById(R.id.launcherAppNameTextView)
         private lateinit var resolveInfo: ResolveInfo
 
         init {
